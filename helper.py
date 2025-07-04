@@ -21,7 +21,7 @@ def get_response(doc):
         elif "what" in span.text and "is" in span.text or "define" in span.text:
             return f"{doc[end:].text} is a great question! Let me look that up for you. \n"
         elif "i" in span.text and "am" in span.text or "my" in span.text and "name" in span.text and "is" in span.text:
-            return f"Hi {doc[-1]} I'm CYD! How can I be of assistance to you."
+            return f"Hi {doc[-1]} I'm AAB! How can I be of assistance to you."
         elif "how" in span.text and "are" in span.text and "you" in span.text:
             return f"I'm feeling great today!..Thank you for asking. How about you ?! "
         elif "fine" in span.text or "good" in span.text or "fantastic" in span.text:
@@ -37,13 +37,13 @@ def get_airesponse(userinput):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "You are a homework helper."},
+            {"role": "system", "content": "You are a helpful homework assistant bot. You provide concise and relevant answers to user queries related to homework, school subjects, and general knowledge."},
             {"role": "user", "content": userinput}
         ]
     )
     return response['choices'][0]['message']['content'].strip()
 
-def homework_helper_bot(user_input):
+def assignment_aid_bot(user_input):
     if user_input.lower() in ["exit", "quit", "bye", "no", "terminate"]:
         return "Goodbye! Have a great day!"
     elif user_input.lower() in ["hi", "hello", "bonjour", "hii"]:

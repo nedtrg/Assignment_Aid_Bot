@@ -4,7 +4,7 @@ import os
 import openai
 from spacy.matcher import Matcher
 import spacy
-from helper import homework_helper_bot
+from helper import assignment_aid_bot
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -14,7 +14,7 @@ load_dotenv()
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
 # Set Streamlit page configuration
-st.set_page_config(page_title="Interactive type Chatbot", page_icon="🤖", layout="wide")
+st.set_page_config(page_title="Interactive User Friendly Chatbot", layout="wide")
 
 # Custom CSS for better styling
 st.markdown("""
@@ -61,14 +61,14 @@ st.markdown("""
     }
     .title {
         text-align: center;
-        font-family: Copperplate, Papyrus;
+        font-family: 'Courier New', Courier, monospace;
         font-weight: bold;
         color: cyan;
         font-size: 60px;
     }
     .subtitle {
         text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
         color: #a6a6a6;
     }
     .stButton > button:first-child {
@@ -133,14 +133,14 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-st.markdown("<div class='title-container'><div><h1 class='title'>CYD Bot</h1></div><div><h3 class='subtitle'>Your Personal Homework Helper</h3></div></div>", unsafe_allow_html=True)
+st.markdown("<div class='title-container'><div><h1 class='title'>AAB Bot</h1></div><div><h3 class='subtitle'>Your Quick Personal Homework Aid Bot</h3></div></div>", unsafe_allow_html=True)
 
 # Initialize session state to store chat history
 if 'messages' not in st.session_state:
     st.session_state.messages = []
 
 def handle_message(user_message):
-    bot_response = homework_helper_bot(user_message)
+    bot_response = assignment_aid_bot(user_message)
     st.session_state.messages.append({"role": "user", "content": user_message})
     # Simulate typing effect
     with st.spinner("Bot is typing..."):
@@ -150,7 +150,7 @@ def handle_message(user_message):
 st.markdown("<div class='main-content'>", unsafe_allow_html=True)
 st.markdown("")
 st.markdown("")
-st.markdown(f'<div class="message-container"><div class="message-bot"><strong>Bot :</strong> Hello!! How can I help you today? </div></div>', unsafe_allow_html=True)
+st.markdown(f'<div class="message-container"><div class="message-bot"><strong>Bot :</strong> Hello!! How can I be of assistance to you today? </div></div>', unsafe_allow_html=True)
 
 # Display chat messages with improved styling
 for message_data in st.session_state.messages:
@@ -162,7 +162,7 @@ for message_data in st.session_state.messages:
 st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("<div class='user-input'>", unsafe_allow_html=True)
-user_input = st.text_input("You: ", key="input_text", placeholder="Type your message here...")
+user_input = st.text_input("You: ", key="input_text", placeholder="Input your prompt here...")
 
 if st.button("Send", key="send_button"):
     if user_input:
